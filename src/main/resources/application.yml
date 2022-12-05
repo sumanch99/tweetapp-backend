@@ -1,0 +1,27 @@
+server:
+  port: 8080
+logging:
+  level:
+    org.springframework.web: DEBUG
+    enableLoggingRequestDetails: false
+  file: 
+    name: ./logs/TweetApp.log
+spring:
+  application:
+    name: tweet-app
+  datasource:
+    url: jdbc:mysql://localhost:3306/tweetapp?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 2311
+    driver-class: com.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
