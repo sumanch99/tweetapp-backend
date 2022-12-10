@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tweetapp.exception.TweetAppException;
-import com.tweetapp.handler.KafkaProducer;
 import com.tweetapp.model.User;
 import com.tweetapp.model.utilityModel.ApiResponse;
 import com.tweetapp.model.utilityModel.ChangePassword;
@@ -34,9 +33,6 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
-	@Autowired
-	KafkaProducer producer;
-	
 	/*
 	 * API Method to sign a new user up to tweet app
 	*/
@@ -88,10 +84,6 @@ public class UserController {
 			throws TweetAppException {
 		
 		log.info("Entered changePassword");
-		/*
-		 * Calling Kafka to send message to consumer
-		*/
-		producer.sendMessage(username);
 		
 		User user = service.updatePassword(cp, username);
 		
